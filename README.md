@@ -19,6 +19,8 @@ Para configurar o Composer utilizando Docker, siga os passos abaixo:
     docker-compose up -d
     ```
 
+> **Nota:** Certifique-se de que o Docker está previamente configurado na sua máquina.
+
 ### Passo 2: Rodar as Migrations do Laravel
 
 Com os containers em execução, você precisa rodar as migrations do Laravel para configurar o banco de dados. Execute o comando abaixo dentro do container da aplicação:
@@ -31,4 +33,4 @@ php artisan migrate
 
 Somente o usuário com a função de `admin` pode alterar o status de outros pedidos. Certifique-se de que o usuário está autenticado e possui a função adequada antes de tentar realizar essa operação.
 
-```
+> **Acesso:** O acesso à aplicação deve ser feito pela URL `http://localhost:8000`.

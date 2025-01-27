@@ -5,6 +5,7 @@ import App from './components/App.vue';
 import Dashboard from './components/Dashboard.vue';
 import New from './components/New.vue';
 import Login from './components/Login.vue';
+import Register from './components/Register.vue';
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import axios from 'axios';
@@ -13,6 +14,7 @@ const routes = [
     { path: '/', component: Dashboard },
     { path: '/new', component: New },
     { path: '/login', component: Login },
+    { path: '/register', component: Register },
     { path: '/edit/:id', component: New } // Use New component for Edit path
 ];
 
@@ -35,7 +37,7 @@ async function revalidateToken() {
 }
 
 router.beforeEach(async (to, from, next) => {
-    const publicPages = ['/login'];
+    const publicPages = ['/login', '/register'];
     const authRequired = !publicPages.includes(to.path);
     const loggedIn = store.state.token || localStorage.getItem('token');
 

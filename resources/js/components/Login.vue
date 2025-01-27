@@ -13,7 +13,7 @@
           <el-button :loading="loading" :disabled="loading" type="primary" native-type="submit">Entrar</el-button>
         </el-form-item>
         <el-form-item>
-          <router-link to="/register">Criar uma nova conta</router-link>
+          <router-link to="/register">Criar uma nova conta</router-link> <!-- Corrigir o link para register -->
         </el-form-item>
       </el-form>
     </div>
@@ -72,9 +72,13 @@ export default {
 
         this.$router.push('/');
       } catch (error) {
+        let errorMessage = 'Falha no login. Por favor, tente novamente.';
+        if (error.response && error.response.data && error.response.data.error) {
+          errorMessage += ` ${error.response.data.error}`;
+        }
         ElNotification({
           title: 'Erro',
-          message: 'Falha no login. Por favor, tente novamente.',
+          message: errorMessage,
           type: 'error',
         });
       } finally {

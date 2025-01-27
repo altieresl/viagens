@@ -25,7 +25,7 @@ class AuthController extends Controller
         ]);
 
         if($validator->fails()){
-            return response()->json($validator->errors()->toJson(), 400);
+            return response()->json(['error' => $validator->errors()->toJson()], 400);
         }
 
         $user = User::create([
@@ -93,7 +93,11 @@ class AuthController extends Controller
      */
     public function logout()
     {
-        JWTAuth::invalidate(JWTAuth::getToken());
+        try {
+            JWTAuth::invalidate(JWTAuth::getToken());
+        } catch (JWTException $e) {
+            return response()->json(['error' => 'Could not invalidate token'], 500);
+        }
 
         return response()->json(['message' => 'Successfully logged out']);
     }
@@ -107,7 +111,7 @@ class AuthController extends Controller
         if ($token && Auth::check()) {
             return response()->json(['status' => 'success']);
         } else {
-            return response()->json(['status' => 'error'], 401);
+            return response()->json(['error' => 'Invalid token or not authenticated'], 401);
         }
     }
 }
