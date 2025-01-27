@@ -29,6 +29,20 @@ Com os containers em execução, você precisa rodar as migrations do Laravel pa
 php artisan migrate
 ```
 
+## Rodando os Testes
+
+Para rodar os testes, siga os passos abaixo:
+
+1. Abra o container do Laravel:
+   ```sh
+   docker-compose exec app bash
+   ```
+
+2. Dentro do container, execute o PHPUnit:
+   ```sh
+   vendor/bin/phpunit
+   ```
+
 ## Permissões de Usuário
 
 Somente o usuário com a função de `admin` pode alterar o status de outros pedidos. Certifique-se de que o usuário está autenticado e possui a função adequada antes de tentar realizar essa operação.
